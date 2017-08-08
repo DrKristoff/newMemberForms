@@ -24,6 +24,30 @@ function prefilledForm(inputRow){
     
 }
 
+function fetchDataFromSpreadsheet(){
+  var spreadsheetId = '19aR3CS3EvanSDhTZxtLL1j6jnoRLpF72cWX9knr0HLo';
+  var rangeName = 'Member Data!D2:D';
+  var values = Sheets.Spreadsheets.Values.get(spreadsheetId, rangeName).values;
+  var stringOutput = "";
+
+  if (!values) {
+    Logger.log('No data found.');
+  } else {
+    Logger.log('Data Found:');
+    for (var row = 0; row < values.length; row++) {
+      // Print columns D, which correspond to index 3.
+      var rowOutput = values[row][0] + ", "
+      Logger.log(' - %s', values[row][0]);
+      stringOutput = stringOutput + rowOutput;
+    }
+    log.innerHTML = stringOutput;
+  }
+    
+    
+}
+
+fetchDataFromSpreadsheet();
+
 /*
 https://docs.google.com/forms/d/e/1FAIpQLSfDCVlAGeBlOMEkJwN5gwxBCM9F6zIjwpfgUuOdFhHkFFRbPw/viewform?usp=pp_url&
 entry.2083101344=Olympia+Ward&entry.141385193=Orlando+South+Stake&
